@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import LoginForm from "./components/Login";
 import { postLogin } from "../../services/login";
 
 export default class Login extends Component {
@@ -50,7 +51,7 @@ export default class Login extends Component {
     }
 
     return (
-      <h1>Hello, I'm a Login presenter!</h1>
+      <LoginForm />
     );
   }
 }
