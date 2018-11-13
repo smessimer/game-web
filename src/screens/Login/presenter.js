@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 
-import LoginForm from "./components/Login";
+import LoginCard from "./components/LoginCard";
 import { postLogin } from "../../services/login";
+import Wrapper from "./components/Wrapper";
+import Vertical from "./components/Vertical";
 
 export default class Login extends Component {
   constructor(props) {
@@ -51,7 +56,11 @@ export default class Login extends Component {
     }
 
     return (
-      <LoginForm />
+      <Wrapper>
+        <Vertical>
+          <LoginCard />
+        </Vertical>
+      </Wrapper>
     );
   }
 }

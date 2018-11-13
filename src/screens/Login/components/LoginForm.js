@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import FormLabel from "@material-ui/core/FormLabel";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
@@ -10,10 +11,15 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   },
+  formLabel: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300,
+  },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 300,
   },
   dense: {
     marginTop: 19,
@@ -48,14 +54,18 @@ class LoginForm extends Component {
         onChange={this.handleChange('email')}
         margin="normal"
       />
+      <br />
       <TextField
         id="standard-password"
         label="Password"
+        type="password"
         className={classes.textField}
         value={this.state.password}
         onChange={this.handleChange('password')}
         margin="normal"
       />
+      <br />
+      <Button>Continue</Button>
       </form>
     );
   }

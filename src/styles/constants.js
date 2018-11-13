@@ -16,6 +16,12 @@ export const color = {
   GREY_90: "#1a1a1a",
 };
 
+export const font = {
+  PRIMARY: [
+    "roboto"
+  ].join()
+};
+
 export const fontSize = {
   BASE: "16px",
   LARGE: "20px",
