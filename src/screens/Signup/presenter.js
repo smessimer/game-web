@@ -1,20 +1,22 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom'; 
 
-import SignupCard from "./components/SignupCard";
-import SignupHeader from "./components/SignupHeader";
-import { postSignup } from "../../services/signup";
-import Wrapper from "./components/Wrapper";
+import SignupCard from './components/SignupCard';
+import SignupHeader from './components/SignupHeader';
+import { postSignup } from '../../services/signup';
+import Wrapper from './components/Wrapper';
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      repeatPassword: "",
-      error: "",
+      email: '',
+      password: '',
+      repeatPassword: '',
+      error: '',
       errorStatusCode: 0,
-      isSubmitting: false
+      isSubmitting: false,
+      loginError: false
     }
   }
 
@@ -28,9 +30,8 @@ export default class Signup extends Component {
   }
 
   handleError = (err) => {
-    alert("oops")
     this.setState({ error: err.message, isSubmitting: false });
-    console.log(err);
+    console.log('handleError:', err);
   };
 
   handleSubmit = (email, password, repeatPassword) => {
@@ -50,10 +51,6 @@ export default class Signup extends Component {
   render() {
     const { error, isSubmitting } = this.state;
 
-    if (error) {
-      return <h1>{error}</h1>;
-    }
-
     return (
       <Wrapper>
         <SignupHeader />
@@ -61,6 +58,7 @@ export default class Signup extends Component {
         <SignupCard
           handleSubmit={this.handleSubmit}
         />
+        <p>Already have an account? <Link to="/login">Login</Link></p>
       </Wrapper>
     );
   }

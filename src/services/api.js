@@ -12,20 +12,12 @@ const Api = {
     }).then(checkStatus);
   },
   post: (endpoint, payload) => {
-    console.log('POST');
     return fetch(`${HOST_URL}${endpoint}`, {
       method: "POST",
       headers: headers(),
       body: JSON.stringify(payload)
     })
-    // .then(checkStatus)
-    .then(res => {
-      console.log('reds in post: ', res)
-    })
-    .catch(err => {
-      console.log("err: ", err)
-      console.log('msg: ', err.message)
-    });
+    .then(checkStatus)
   }
 };
 

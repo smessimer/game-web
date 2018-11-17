@@ -1,35 +1,23 @@
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { setLoggedIn, setUser } from '../../store/actions';
+import Login from './presenter';
 
-import {
-  clearAuthError,
-  postLogin
-} from "../../store/Auth/actions";
+const mapStateToProps = state => ({
+  loggedIn: state.auth,
+})
 
-import {
-  isAuthenticated,
-  isFetchingAuth
-} from "../../store/selectors";
-
-import Login from "./presenter";
-
-function mapStateToProps(state) {
-  return {
-    isAuthenticated: isAuthenticated(state),
+const mapDispatchToProps = dispatch => ({
+  setUser: (user) => {
+    dispatch(setUser(user));
+  },
+  setLoggedIn: (isLoggedIn) => {
+    dispatch(setLoggedIn(isLoggedIn));
   }
-}
+});
 
-function mapActionsToProps(dispatch) {
-  return bindActionCreators(
-    {
-      clearAuthError,
-      postLogin
-    },
-    dispatch
-  );
-}
-
-export default connect(
+const LoginContainer = connect(
   mapStateToProps,
-  mapActionsToProps
-)(Login);
+  mapDispatchToProps)
+  (Login);
+
+export default LoginContainer;

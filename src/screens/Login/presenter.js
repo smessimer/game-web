@@ -1,5 +1,8 @@
 import React, { Component } from "react";
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import Invalid from "./components/Invalid";
 import LoginCard from "./components/LoginCard";
 import LoginHeader from "./components/LoginHeader";
 import { postLogin } from "../../services/login";
@@ -13,7 +16,8 @@ export default class Login extends Component {
       password: "",
       error: "",
       errorStatusCode: 0,
-      isSubmitting: false
+      isSubmitting: false,
+      loginError: false
     }
   }
 
@@ -27,9 +31,7 @@ export default class Login extends Component {
   }
 
   handleError = (err) => {
-    alert("oops")
-    this.setState({ error: err.message, isSubmitting: false });
-    console.log(err);
+    this.setState({ error: err.error, isSubmitting: false });
   };
 
   handleSubmit = (email, password) => {
@@ -41,7 +43,11 @@ export default class Login extends Component {
 
     postLogin(data.email, data.password)
       .then(res => {
-        this.setState({ isSubmitting: false});
+        this.setState({ isSubmitting: false });
+        console.log('res: ', res);
+        // Getting somewhwere! The 'res' is the user. Store this in redux.
+        this.props.setUser(res);
+        this.props.setLoggedIn(true);
       })
       .catch(this.handleError);
   }
@@ -49,17 +55,27 @@ export default class Login extends Component {
   render() {
     const { error, isSubmitting } = this.state;
 
-    if (error) {
-      return <h1>{error}</h1>;
+    if (this.props.auth) {
+      console.log('this.props: ', this.props)
+      return <Redirect to='/u/dashboard' />;
+    }
+
+    if (this.props.loggedIn) {
+      console.log('logged in');
+      return <Redirect to='/u/dashboard' />;
     }
 
     return (
       <Wrapper>
         <LoginHeader />
-        <br/> 
+        {this.state.error && (
+          <Invalid text={this.state.error}/>
+        )}
+        <br />
         <LoginCard
           handleSubmit={this.handleSubmit}
         />
+        <p>Don't have an account? <Link to="/signup">Register</Link></p>
       </Wrapper>
     );
   }

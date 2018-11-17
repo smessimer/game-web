@@ -14,6 +14,7 @@ export const color = {
   GREY_70: "#4c4c4c",
   GREY_80: "#333333",
   GREY_90: "#1a1a1a",
+  ERROR: "#F44336",
 };
 
 export const font = {
