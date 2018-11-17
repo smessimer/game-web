@@ -7,4 +7,5 @@ export default styled.div`
   min-height: 100%;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 `;

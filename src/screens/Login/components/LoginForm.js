@@ -1,24 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import FormLabel from "@material-ui/core/FormLabel";
 import { withStyles } from "@material-ui/core/styles";
 
-const styles = theme => ({
+import Center from "./Center";
+
+const styles = {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
   formLabel: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: 300,
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginBottom: '2em',
     width: 300,
   },
   dense: {
@@ -27,7 +24,7 @@ const styles = theme => ({
   menu: {
     width: 200,
   },
-});
+};
 
 class LoginForm extends Component {
   state = {
@@ -42,10 +39,15 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, handleSubmit } = this.props;
+
+    const onSubmit = e => {
+      e.preventDefault()
+      this.props.handleSubmit(this.state.email, this.state.password);
+    };
 
     return (
-      <form classname={classes.container} noValidate autoComplete="off">
+      <form classname={classes.container} noValidate autoComplete="off" onSubmit={onSubmit}>
       <TextField
         id="standard-email"
         label="Email"
@@ -65,7 +67,13 @@ class LoginForm extends Component {
         margin="normal"
       />
       <br />
-      <Button>Continue</Button>
+      <Center>
+        <Button
+          type="submit"
+        >
+        Continue
+        </Button>
+      </Center>
       </form>
     );
   }

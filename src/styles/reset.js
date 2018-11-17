@@ -21,6 +21,7 @@ export default createGlobalStyle`
     line-height: 1.6;
     color: ${color.AUDI_BLACK};
     height: 100%;
+    background-color: ${color.GREY_5};
   }
 
   div[id=root] {

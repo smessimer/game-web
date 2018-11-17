@@ -26,12 +26,12 @@ const styles = {
 };
 
 function LoginCard(props) {
-  const { classes } = props;
+  const { classes, handleSubmit } = props;
 
   return (
     <Card className = { classes.card }>
       <CardContent>
-        <LoginForm />
+        <LoginForm handleSubmit={handleSubmit} />
       </CardContent>
     </Card>
   )

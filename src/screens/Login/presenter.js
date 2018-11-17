@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 
 import LoginCard from "./components/LoginCard";
+import LoginHeader from "./components/LoginHeader";
 import { postLogin } from "../../services/login";
 import Wrapper from "./components/Wrapper";
-import Vertical from "./components/Vertical";
 
 export default class Login extends Component {
   constructor(props) {
@@ -29,20 +26,22 @@ export default class Login extends Component {
     return newState;
   }
 
-  submitEmail = (values) => {
-    this.props.login(values.email, values.password);
-  }
-
   handleError = (err) => {
+    alert("oops")
     this.setState({ error: err.message, isSubmitting: false });
     console.log(err);
   };
 
-  handleSubmit = (values, actions) => {
+  handleSubmit = (email, password) => {
+    const data = {
+      email,
+      password,
+    };
     this.setState({ isSubmitting: true });
 
-    postLogin(values.email, values.password)
+    postLogin(data.email, data.password)
       .then(res => {
+        alert('Success')
         this.setState({ isSubmitting: false});
       })
       .catch(this.handleError);
@@ -57,9 +56,11 @@ export default class Login extends Component {
 
     return (
       <Wrapper>
-        <Vertical>
-          <LoginCard />
-        </Vertical>
+        <LoginHeader />
+        <br/> 
+        <LoginCard
+          handleSubmit={this.handleSubmit}
+        />
       </Wrapper>
     );
   }
