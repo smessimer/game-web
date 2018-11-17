@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 
-import LoginCard from "./components/LoginCard";
-import LoginHeader from "./components/LoginHeader";
-import { postLogin } from "../../services/login";
+import SignupCard from "./components/SignupCard";
+import SignupHeader from "./components/SignupHeader";
+import { postSignup } from "../../services/signup";
 import Wrapper from "./components/Wrapper";
 
-export default class Login extends Component {
+export default class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: "",
+      repeatPassword: "",
       error: "",
       errorStatusCode: 0,
       isSubmitting: false
@@ -32,14 +33,14 @@ export default class Login extends Component {
     console.log(err);
   };
 
-  handleSubmit = (email, password) => {
+  handleSubmit = (email, password, repeatPassword) => {
     const data = {
       email,
       password,
     };
     this.setState({ isSubmitting: true });
 
-    postLogin(data.email, data.password)
+    postSignup(data.email, data.password)
       .then(res => {
         this.setState({ isSubmitting: false});
       })
@@ -55,9 +56,9 @@ export default class Login extends Component {
 
     return (
       <Wrapper>
-        <LoginHeader />
+        <SignupHeader />
         <br/> 
-        <LoginCard
+        <SignupCard
           handleSubmit={this.handleSubmit}
         />
       </Wrapper>
