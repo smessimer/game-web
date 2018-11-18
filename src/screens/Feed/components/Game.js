@@ -17,8 +17,8 @@ export default function GameCard(props) {
    */
 
   return (
-    <div style={{display:"flex", alignItems:"center"}}>
-    <Avatar src={props.imgUrl}></Avatar>
+    <div style={{display:"flex", alignItems:"center", marginBottom:"0.5em"}}>
+    <img src={props.imgUrl} height="25px" width="25px"></img>
     <b><a style={{marginLeft:"1em"}} href={props.gameLink} target="_blank">{props.gameName}</a></b><div style={{marginLeft:"0.5em"}}>{props.playTime}</div>
     </div>
   );

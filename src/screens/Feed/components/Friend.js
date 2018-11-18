@@ -35,7 +35,7 @@ function FriendCard(props) {
       <CardContent>
         <div style={{display:"flex", alignItems:"left", flexDirection:"column"}}>
         <div style={{display:"flex", alignItems:"center", marginBottom:"0.5em"}}>
-        <Avatar src={props.imgUrl}></Avatar>
+        <img src={props.imgUrl} height="40px" width="40px"></img>
         <h5 style={{marginLeft:"0.5em", paddingBottom:"0.5em"}}>{props.friendName}</h5>
         </div>
         <div style={{marginLeft:"3em"}}>
@@ -44,6 +44,18 @@ function FriendCard(props) {
             gameName='Divinity: Original Sin 2'
             gameLink='https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/'
             playTime='8.5h'
+          />
+          <Game
+            imgUrl='https://steamcdn-a.akamaihd.net/steam/apps/973760/header.jpg?t=1541940371'
+            gameName='Thronebreaker: The Wither Tales'
+            gameLink='https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/'
+            playTime='2h'
+          />
+          <Game
+            imgUrl='https://steamcdn-a.akamaihd.net/steam/apps/264710/header.jpg?t=1540950862'
+            gameName='Subnautica'
+            gameLink='https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/'
+            playTime='1.5h'
           />
           </div>
         </div>
