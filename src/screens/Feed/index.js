@@ -1,5 +1,2 @@
-import React from 'react';
-
-export default (props) => {
-  return <p>Feed</p>;
-};
+import Feed from "./presenter";
+export default Feed;
