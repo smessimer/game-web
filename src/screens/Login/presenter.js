@@ -31,7 +31,7 @@ export default class Login extends Component {
   }
 
   handleError = (err) => {
-    this.setState({ error: err.error, isSubmitting: false });
+    this.setState({ error: err.error || 'Error on server', isSubmitting: false });
   };
 
   handleSubmit = (email, password) => {
@@ -57,12 +57,12 @@ export default class Login extends Component {
 
     if (this.props.auth) {
       console.log('this.props: ', this.props)
-      return <Redirect to='/u/dashboard' />;
+      return <Redirect to='/u/feed' />;
     }
 
     if (this.props.loggedIn) {
       console.log('logged in');
-      return <Redirect to='/u/dashboard' />;
+      return <Redirect to='/u/feed' />;
     }
 
     return (

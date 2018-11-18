@@ -5,16 +5,19 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import { store } from './store';
+import { persistor, store } from './store';
 
 import "./styles/reset";
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <PersistGate loading={<h1>Loading...</h1>} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+    </PersistGate>
   </Provider>
 , document.getElementById('root'));
 
