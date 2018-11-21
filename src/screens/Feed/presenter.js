@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import getGames from '../../services/getGames';
+import getFriendsAndStats from '../../services/getFriendsAndStats';
 
 import HalfWidth from './components/HalfWidth';
 import Wrapper from './components/Wrapper';
@@ -12,15 +13,22 @@ export default class Feed extends Component {
   }
 
   componentDidMount() {
-    getGames(this.props.userId)
+    getFriendsAndStats(this.props.userId)
       .then(result => {
-        this.setState({ gettingGames: false, gamesList: result });
-        console.log('result: ', result)
+        console.log('result', result)
       })
       .catch(err => {
-        this.setState({ gettingGames: false, gamesList: null });
-        console.log('Error getting games: ', err);
+        console.log('err: ', err);
       })
+    // getGames(this.props.userId)
+    //   .then(result => {
+    //     this.setState({ gettingGames: false, gamesList: result });
+    //     console.log('result: ', result)
+    //   })
+    //   .catch(err => {
+    //     this.setState({ gettingGames: false, gamesList: null });
+    //     console.log('Error getting games: ', err);
+    //   })
   }
 
   static getDerivedStateFromProps(props, state) {
