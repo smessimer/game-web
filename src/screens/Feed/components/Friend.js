@@ -27,8 +27,18 @@ function FriendCard(props) {
    *  imgUrl,
    *  friendName,
    *  friendLink,
+   *  gamesList,
    * }
    */
+
+  const games = props.gamesList.map( game => {
+    return <Game
+              imgUrl={game.imgUrl}
+              gameName={game.gameName}
+              gameLink={game.gameLink}
+              playTime={game.playTime}
+            />;
+  });
 
   return (
     <Card className={classes.card}>
@@ -39,25 +49,9 @@ function FriendCard(props) {
         <h5 style={{marginLeft:"0.5em", paddingBottom:"0.5em"}}>{props.friendName}</h5>
         </div>
         <div style={{marginLeft:"3em"}}>
-        <Game
-            imgUrl='https://steamcdn-a.akamaihd.net/steam/apps/435150/header.jpg?t=1539352146'
-            gameName='Divinity: Original Sin 2'
-            gameLink='https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/'
-            playTime='8.5h'
-          />
-          <Game
-            imgUrl='https://steamcdn-a.akamaihd.net/steam/apps/973760/header.jpg?t=1541940371'
-            gameName='Thronebreaker: The Wither Tales'
-            gameLink='https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/'
-            playTime='2h'
-          />
-          <Game
-            imgUrl='https://steamcdn-a.akamaihd.net/steam/apps/264710/header.jpg?t=1540950862'
-            gameName='Subnautica'
-            gameLink='https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/'
-            playTime='1.5h'
-          />
-          </div>
+
+        {props.gamesList && games}
+        </div>
         </div>
       </CardContent>
     </Card>

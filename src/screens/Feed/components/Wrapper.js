@@ -6,4 +6,5 @@ export default styled.div`
   align-items: stretch;
   max-width: 1500px;
   flex-direction: row;
+  justify-content: center;
 `;
