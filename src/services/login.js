@@ -7,5 +7,5 @@ export const postLogin = (email, password) => {
         email,
         password
       }
-    });
+    }, true);
 }

@@ -6,6 +6,7 @@ import Invalid from "./components/Invalid";
 import LoginCard from "./components/LoginCard";
 import LoginHeader from "./components/LoginHeader";
 import { postLogin } from "../../services/login";
+import { getUser } from '../../services/getUser';
 import Wrapper from "./components/Wrapper";
 
 export default class Login extends Component {
@@ -43,10 +44,16 @@ export default class Login extends Component {
 
     postLogin(data.email, data.password)
       .then(res => {
-        this.setState({ isSubmitting: false });
-        console.log('res: ', res);
-        // Getting somewhwere! The 'res' is the user. Store this in redux.
+        return res;
+      })
+      .then(res => {
+        console.log('res2: ', res)
+        return getUser(res.id);
+      })
+      .then(res => {
+        console.log('res3: ', res)
         this.props.setUser(res);
+        this.setState({ isSubmitting: false });
         this.props.setLoggedIn(true);
       })
       .catch(this.handleError);

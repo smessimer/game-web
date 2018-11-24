@@ -1,3 +1,4 @@
+// import Cookies from 'niversal-cookie';
 import headers from "./headers";
 import checkStatus from "./checkStatus";
 
@@ -5,17 +6,19 @@ import checkStatus from "./checkStatus";
 const HOST_URL = "http://localhost:3000";
 
 const Api = {
-  get: (endpoint) => {
+  get: (endpoint, includeCredentials = false) => {
     return fetch(`${HOST_URL}${endpoint}`, {
       method: "GET",
-      headers: headers()
+      headers: headers(),
+      credentials: includeCredentials ? 'include' : undefined
     }).then(checkStatus);
   },
-  post: (endpoint, payload) => {
+  post: (endpoint, payload, includeCredentials = false) => {
     return fetch(`${HOST_URL}${endpoint}`, {
       method: "POST",
       headers: headers(),
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      credentials: includeCredentials ? 'include' : undefined
     })
     .then(checkStatus)
   }

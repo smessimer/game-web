@@ -1,11 +1,8 @@
 import Api from './api';
 
 export default (steamUserId) => {
-  return Api.get(`/steam_users/${steamUserId}/steam_friends`)
-    .then(friends => {
-      console.log('friends: ', friends);
-    })
+  return Api.get(`/steam_users/${steamUserId}/steam_friends`, true)
     .catch(err => {
-      console.log('gfas err: ', err);
+      console.log('Error fetching friends: ', err)
     });
 }

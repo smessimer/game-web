@@ -1,2 +1,2 @@
-import Feed from "./presenter";
+import Feed from "./container";
 export default Feed;

@@ -13,7 +13,7 @@ export default class Feed extends Component {
   }
 
   componentDidMount() {
-    getFriendsAndStats(this.props.userId)
+    getFriendsAndStats(this.props.steamUserId)
       .then(result => {
         console.log('result', result)
       })
