@@ -6,20 +6,43 @@ import HalfWidth from './components/HalfWidth';
 import Wrapper from './components/Wrapper';
 import FriendCard from './components/Friend';
 
+const friendCards = (friendsList) => {
+  return friendsList.map(friend => {
+    if (friend.playtime.total_count && friend.playtime.total_count > 0) {
+      return <FriendCard
+        key={friend.steamid}
+        imgUrl={friend.avatar}
+        friendName={friend.personaname}
+        gamesList={friend.playtime.games.map(game => {
+          return {
+            imgUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_logo_url}.jpg`,
+            gameName: game.name,
+            gameLink: '#',
+            playTime: game.playtime_2weeks,
+          };
+        })}
+      />
+    }
+  })
+}
+
 export default class Feed extends Component {
   constructor(props) {
     super(props);
     this.setState({ gettingGames: true });
   }
 
-  componentDidMount() {
-    getFriendsAndStats(this.props.steamUserId)
-      .then(result => {
-        console.log('result', result)
-      })
-      .catch(err => {
-        console.log('err: ', err);
-      })
+  async componentDidMount() {
+    let friendsList = {};
+    try {
+      friendsList = await getFriendsAndStats(this.props.steamUserId);
+    } catch (err) {
+      throw err;
+    }
+
+    // Map friends list to what we want to display
+    this.setState({ gettingGames: false, friendsList: friendsList });
+
     // getGames(this.props.userId)
     //   .then(result => {
     //     this.setState({ gettingGames: false, gamesList: result });
@@ -49,13 +72,7 @@ export default class Feed extends Component {
         </HalfWidth>
         <HalfWidth>
           <p>Activity</p>
-          { this.state && this.state.gamesList &&
-          <FriendCard 
-            imgUrl='https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/82/8240b562db3cfe84c8ed30bddcf0fbd76b46cee5_full.jpg'
-            friendName='MrMessy'
-            gamesList={this.state.gamesList}
-          />
-          }
+          { this.state && this.state.friendsList && friendCards(this.state.friendsList) }
         </HalfWidth>
       </Wrapper>
     );

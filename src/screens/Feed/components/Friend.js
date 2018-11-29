@@ -33,10 +33,11 @@ function FriendCard(props) {
 
   const games = props.gamesList.map( game => {
     return <Game
+              key={game.gameName}
               imgUrl={game.imgUrl}
               gameName={game.gameName}
               gameLink={game.gameLink}
-              playTime={game.playTime}
+              playTime={(game.playTime.toFixed(2)/60).toFixed(1)}
             />;
   });
 
@@ -44,14 +45,13 @@ function FriendCard(props) {
     <Card className={classes.card}>
       <CardContent>
         <div style={{display:"flex", alignItems:"left", flexDirection:"column"}}>
-        <div style={{display:"flex", alignItems:"center", marginBottom:"0.5em"}}>
-        <img src={props.imgUrl} height="40px" width="40px"></img>
-        <h5 style={{marginLeft:"0.5em", paddingBottom:"0.5em"}}>{props.friendName}</h5>
-        </div>
-        <div style={{marginLeft:"3em"}}>
-
-        {props.gamesList && games}
-        </div>
+          <div key="friendDiv" style={{display:"flex", alignItems:"center", marginBottom:"0.5em"}}>
+            <img alt="friend icon" src={props.imgUrl} height="40px" width="40px"></img>
+            <h5 style={{marginLeft:"0.5em", paddingBottom:"0.5em"}}>{props.friendName}</h5>
+          </div>
+          <div key="gamesDiv" style={{marginLeft:"3em"}}>
+            {props.gamesList && games}
+          </div>
         </div>
       </CardContent>
     </Card>
