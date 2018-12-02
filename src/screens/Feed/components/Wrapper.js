@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
+  margin: auto;
   position:relative;
   display: flex;
   align-items: stretch;
