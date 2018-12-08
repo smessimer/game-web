@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import getGames from '../../services/getGames';
 import getFriendsAndStats from '../../services/getFriendsAndStats';
+import getPosts from '../../services/getPosts';
 
 import HalfWidth from './components/HalfWidth';
 import Wrapper from './components/Wrapper';
 import FriendCard from './components/Friend';
+import PostCard from './components/Post';
 
 const friendCards = (friendsList) => {
   return friendsList.map(friend => {
@@ -26,32 +28,39 @@ const friendCards = (friendsList) => {
   })
 }
 
+const postCards = (postsList) => {
+  return postsList.map(post => {
+    console.log('post: ', post)
+    return <PostCard
+      key={post.id}
+      caption={post.caption}
+      upvotes={post.upvotes}
+      media_url={post.media_url}
+      user_id={post.user_id}
+      created_at={post.created_at}
+      updated_at={post.updated_at}
+    />
+  })
+}
+
 export default class Feed extends Component {
   constructor(props) {
     super(props);
-    this.setState({ gettingGames: true });
+    this.setState({ gettingPosts: true, gettingGames: true });
   }
 
   async componentDidMount() {
     let friendsList = {};
+    let postsList = {};
     try {
+      postsList = await getPosts(this.props.userId)
       friendsList = await getFriendsAndStats(this.props.steamUserId);
     } catch (err) {
       throw err;
     }
 
     // Map friends list to what we want to display
-    this.setState({ gettingGames: false, friendsList: friendsList });
-
-    // getGames(this.props.userId)
-    //   .then(result => {
-    //     this.setState({ gettingGames: false, gamesList: result });
-    //     console.log('result: ', result)
-    //   })
-    //   .catch(err => {
-    //     this.setState({ gettingGames: false, gamesList: null });
-    //     console.log('Error getting games: ', err);
-    //   })
+    this.setState({ gettingGames: false, friendsList: friendsList, postsList: postsList });
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -64,11 +73,11 @@ export default class Feed extends Component {
   }
 
   render() {
-    console.log('this.gamesList: ', this.gamesList);
     return (
       <Wrapper>
         <HalfWidth>
           <p>Feed</p>
+          { this.state && this.state.postsList && postCards(this.state.postsList) }
         </HalfWidth>
         <HalfWidth>
           <p>Activity</p>

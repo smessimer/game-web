@@ -17,7 +17,6 @@ const user = (state = {}, action) => {
 };
 
 const auth = (state = false, action) => {
-  console.log('action: ', action)
   switch (action.type) {
     case SET_LOGGED_IN:
       return action.loggedIn;

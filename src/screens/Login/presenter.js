@@ -47,11 +47,9 @@ export default class Login extends Component {
         return res;
       })
       .then(res => {
-        console.log('res2: ', res)
         return getUser(res.id);
       })
       .then(res => {
-        console.log('res3: ', res)
         this.props.setUser(res);
         this.setState({ isSubmitting: false });
         this.props.setLoggedIn(true);
@@ -63,12 +61,10 @@ export default class Login extends Component {
     const { error, isSubmitting } = this.state;
 
     if (this.props.auth) {
-      console.log('this.props: ', this.props)
       return <Redirect to='/u/feed' />;
     }
 
     if (this.props.loggedIn) {
-      console.log('logged in');
       return <Redirect to='/u/feed' />;
     }
 

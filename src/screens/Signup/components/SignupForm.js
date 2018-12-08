@@ -111,7 +111,6 @@ class SignupForm extends Component {
 
     const onSubmit = e => {
       e.preventDefault()
-      console.log('state: ', this.state);
 
       if (!this.state.passwordMatch) {
         this.setState({
