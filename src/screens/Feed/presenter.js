@@ -36,9 +36,10 @@ const postCards = (postsList) => {
       caption={post.caption}
       upvotes={post.upvotes}
       media_url={post.media_url}
-      user_id={post.user_id}
       created_at={post.created_at}
       updated_at={post.updated_at}
+      username={post.steam_user.username}
+
     />
   })
 }
@@ -52,15 +53,15 @@ export default class Feed extends Component {
   async componentDidMount() {
     let friendsList = {};
     let postsList = {};
-    try {
-      postsList = await getPosts(this.props.userId)
-      friendsList = await getFriendsAndStats(this.props.steamUserId);
-    } catch (err) {
-      throw err;
-    }
+    getPosts(this.props.userId)
+      .then((result) => {
+        this.setState({ gettingPosts: false, postsList: result})
+      })
 
-    // Map friends list to what we want to display
-    this.setState({ gettingGames: false, friendsList: friendsList, postsList: postsList });
+    getFriendsAndStats(this.props.steamUserId)
+      .then((result) => {
+        this.setState({ gettingGames: false, friendsList: result })
+      })
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -77,11 +78,11 @@ export default class Feed extends Component {
       <Wrapper>
         <HalfWidth>
           <p>Feed</p>
-          { this.state && this.state.postsList && postCards(this.state.postsList) }
+          { this.state && !this.state.gettingPosts && this.state.postsList && postCards(this.state.postsList) }
         </HalfWidth>
         <HalfWidth>
           <p>Activity</p>
-          { this.state && this.state.friendsList && friendCards(this.state.friendsList) }
+          { this.state && !this.state.gettingFriends && this.state.friendsList && friendCards(this.state.friendsList) }
         </HalfWidth>
       </Wrapper>
     );

@@ -32,6 +32,7 @@ export default class Login extends Component {
   }
 
   handleError = (err) => {
+    console.log('Error: ', err);
     this.setState({ error: err.error || 'Error on server', isSubmitting: false });
   };
 

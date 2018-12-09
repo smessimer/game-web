@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setLoggedIn, setUser } from '../../store/actions';
+import { setLoggedIn, setUser, setSteamUser } from '../../store/actions';
 import Login from './presenter';
 
 const mapStateToProps = state => ({
@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setUser: (user) => {
     dispatch(setUser(user));
+    dispatch(setSteamUser(user.steam_user));
   },
   setLoggedIn: (isLoggedIn) => {
     dispatch(setLoggedIn(isLoggedIn));
