@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import { withStyles } from '@material-ui/core';
 
 import Game from './Game';
@@ -12,7 +14,7 @@ const styles = {
     marginBottom: '1em',
   },
   title: {
-    fontSize: 14,
+    fontSize: 18,
   },
   pos: {
     marginBottom: 12,
@@ -42,12 +44,21 @@ function FriendCard(props) {
 
   return (
     <Card className={classes.card}>
+      <CardHeader
+        classes={{title: classes.title}}
+        title={props.friendName}
+        avatar={
+          <Avatar src={props.imgUrl} aria-label="Avatar" className={classes.avatar}>
+          </Avatar>
+        }
+      >
+        <div key="friendDiv" style={{display:"flex", alignItems:"center", marginBottom:"0.5em"}}>
+          <img alt="friend icon" src={props.imgUrl} height="40px" width="40px"></img>
+          <h5 style={{marginLeft:"0.5em", paddingBottom:"0.5em"}}>{props.friendName}</h5>
+        </div>
+      </CardHeader>
       <CardContent>
         <div style={{display:"flex", alignItems:"left", flexDirection:"column"}}>
-          <div key="friendDiv" style={{display:"flex", alignItems:"center", marginBottom:"0.5em"}}>
-            <img alt="friend icon" src={props.imgUrl} height="40px" width="40px"></img>
-            <h5 style={{marginLeft:"0.5em", paddingBottom:"0.5em"}}>{props.friendName}</h5>
-          </div>
           <div key="gamesDiv" style={{marginLeft:"3em"}}>
             {props.gamesList && games}
           </div>

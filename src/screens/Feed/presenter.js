@@ -3,7 +3,8 @@ import getGames from '../../services/getGames';
 import getFriendsAndStats from '../../services/getFriendsAndStats';
 import getPosts from '../../services/getPosts';
 
-import HalfWidth from './components/HalfWidth';
+import MainColumn from './components/MainColumn';
+import SecColumn from './components/SecColumn';
 import Wrapper from './components/Wrapper';
 import FriendCard from './components/Friend';
 import PostCard from './components/Post';
@@ -76,14 +77,12 @@ export default class Feed extends Component {
   render() {
     return (
       <Wrapper>
-        <HalfWidth>
-          <p>Feed</p>
+        <MainColumn>
           { this.state && !this.state.gettingPosts && this.state.postsList && postCards(this.state.postsList) }
-        </HalfWidth>
-        <HalfWidth>
-          <p>Activity</p>
+        </MainColumn>
+        <SecColumn>
           { this.state && !this.state.gettingFriends && this.state.friendsList && friendCards(this.state.friendsList) }
-        </HalfWidth>
+        </SecColumn>
       </Wrapper>
     );
   }

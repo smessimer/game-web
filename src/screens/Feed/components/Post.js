@@ -5,13 +5,14 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import { withStyles, CardMedia } from '@material-ui/core';
 
-const styles = {
+const styles = theme => ({
   card: {
     minWidth: 275,
     marginBottom: '1em',
   },
   title: {
-    fontSize: 14,
+    fontSize: 18,
+    marginBottom: 0,
   },
   pos: {
     marginBottom: 12,
@@ -20,7 +21,10 @@ const styles = {
     height: 0,
     paddingTop: '56.25%',
   },
-};
+  actions: {
+    display: 'flex',
+  }
+});
 
 function media(url, type) {
   return <CardMedia
@@ -48,12 +52,13 @@ function PostCard(props) {
 
   return (
     <Card className={classes.card}>
-      <CardHeader title={props.username} variant="h6" />
-      {/* {props.media_url && media(props.media_url, classes.media)} */}
-      <CardMedia
-    image={props.media_url}
-    title={props.media_url}
-  />
+      <CardHeader classes={{title: classes.title}} title={props.username} variant="h6" />
+      {props.media_url && media(props.media_url, classes.media)}
+      {/* <CardMedia
+        className={classes.media}
+        image={props.media_url}
+        title={props.media_url}
+      /> */}
       <CardContent>
         {props.caption}
       </CardContent>
