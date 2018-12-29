@@ -8,15 +8,17 @@ import SecColumn from './components/SecColumn';
 import Wrapper from './components/Wrapper';
 import FriendCard from './components/Friend';
 import PostCard from './components/Post';
+import NewPostCard from './components/NewPost';
+
 
 const friendCards = (friendsList) => {
   return friendsList.map(friend => {
-    if (friend.playtime.total_count && friend.playtime.total_count > 0) {
+    if (friend.playtime.playtime.total_count && friend.playtime.playtime.total_count > 0) {
       return <FriendCard
         key={friend.steamid}
         imgUrl={friend.avatar}
         friendName={friend.personaname}
-        gamesList={friend.playtime.games.map(game => {
+        gamesList={friend.playtime.playtime.games.map(game => {
           return {
             imgUrl: `http://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_logo_url}.jpg`,
             gameName: game.name,
@@ -78,6 +80,7 @@ export default class Feed extends Component {
     return (
       <Wrapper>
         <MainColumn>
+          <NewPostCard></NewPostCard>
           { this.state && !this.state.gettingPosts && this.state.postsList && postCards(this.state.postsList) }
         </MainColumn>
         <SecColumn>
