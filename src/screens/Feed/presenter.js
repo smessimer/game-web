@@ -9,6 +9,7 @@ import Wrapper from './components/Wrapper';
 import FriendCard from './components/Friend';
 import PostCard from './components/Post';
 import NewPostCard from './components/NewPost';
+import { createPost } from '../../services/createPost';
 
 
 const friendCards = (friendsList) => {
@@ -76,11 +77,22 @@ export default class Feed extends Component {
     return newState;
   }
 
+  handleNewPostSubmit = (text, mediaUrl) => {
+    this.setState({ isSubmitting: true });
+
+    createPost(text, mediaUrl, this.props.steamUserId)
+      .then(res => {
+        return res;
+      })
+      .catch(this.handleError);
+  }
+
+
   render() {
     return (
       <Wrapper>
         <MainColumn>
-          <NewPostCard></NewPostCard>
+          <NewPostCard handleSubmit={this.handleNewPostSubmit}></NewPostCard>
           { this.state && !this.state.gettingPosts && this.state.postsList && postCards(this.state.postsList) }
         </MainColumn>
         <SecColumn>
